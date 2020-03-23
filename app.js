@@ -1,7 +1,9 @@
+require('dotenv').config();
 const express = require('express');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 require('http');
+
 
 // Set up the express app
 const app = express();
@@ -21,6 +23,6 @@ app.get('*', (req, res) => res.status(200).send({
     message: 'Welcome to the beginning of nothingness.',
 }));
 
-const PORT = process.env.PORT | 8000;
+const PORT = process.env.PORT || 8000;
 
 app.listen(PORT, console.log(`Server started on port ${PORT}`));
