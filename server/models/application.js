@@ -39,6 +39,24 @@ module.exports = (sequelize, DataTypes) => {
     },{
         tableName: 'application'
     });
-
+    
+    Application.associate = (models) => {
+        Application.hasOne(models.JobPosting,{
+            through: 'Application_JobPosting'
+        });
+    };
+    
+    Application.associate = (models) => {
+        Application.hasOne(models.UserFile,{
+            through: 'Application_UserFile'
+        });
+    };
+    
+    Application.associate = (models) => {
+        Application.hasOne(models.User,{
+            through: 'Application_Users'
+        });
+    };
+    
     return Application
 };
