@@ -54,7 +54,7 @@ module.exports = (sequelize, DataTypes) => {
     
     Application.associate = (models) => {
         Application.hasOne(models.User,{
-            through: 'Application_Users'
+            through: 'Application_User'
         });
     };
     
