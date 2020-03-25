@@ -52,6 +52,7 @@ module.exports = (sequelize, DataTypes) => {
         });
     };
     
+    // we should consider taking out this relation because Application takes FK from User File, so i'm not sure if this will imply that Application should take FK userID from User instead of UserFile
     Application.associate = (models) => {
         Application.hasOne(models.User,{
             through: 'Application_User'
