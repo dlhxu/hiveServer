@@ -68,7 +68,7 @@ module.exports = (sequelize, DataTypes) => {
     };
     
     JobPosting.associate = (models) => {
-         JobPosting.belongsTo(models.JobTags);
+         JobPosting.belongsTo(models.JobTag);
     };
     
     return JobPosting
