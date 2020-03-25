@@ -15,5 +15,9 @@ module.exports = (sequelize, DataTypes) => {
         tableName: 'institution'
     });
 
+    Institution.associate = (models) => {
+         Institution.belongsTo(models.UserEducation);
+    };
+    
     return Institution
 };
