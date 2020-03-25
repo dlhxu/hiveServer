@@ -19,6 +19,22 @@ module.exports = (sequelize, DataTypes) => {
     },{
         tableName: 'users'
     });
-
+    
+    User.associate = (models) => {
+         User.belongsTo(models.UserFile);
+    };
+    
+    User.associate = (models) => {
+         User.belongsTo(models.Skill);
+    };
+    
+    User.associate = (models) => {
+         User.belongsTo(models.UserEducation);
+    };
+    
+    User.associate = (models) => {
+         User.belongsTo(models.PreviousPosition);
+    };
+    
     return User
 };
