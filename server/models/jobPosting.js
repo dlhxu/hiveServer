@@ -58,6 +58,18 @@ module.exports = (sequelize, DataTypes) => {
     },{
         tableName: 'jobPosting'
     });
-
+    
+    JobPosting.associate = (models) => {
+        JobPosting.hasMany(models.Employer);
+    };
+    
+    JobPosting.associate = (models) => {
+         JobPosting.belongsTo(models.Application);
+    };
+    
+    JobPosting.associate = (models) => {
+         JobPosting.belongsTo(models.JobTags);
+    };
+    
     return JobPosting
 };
