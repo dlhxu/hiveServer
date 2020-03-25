@@ -28,5 +28,13 @@ module.exports = (sequelize, DataTypes) => {
         tableName: 'skill'
     });
 
+    Skill.associate = (models) => {
+        Skill.hasMany(models.User);
+    };
+    
+    Skill.associate = (models) => {
+        Skill.hasMany(models.JobTags);
+    };
+    
     return Skill
 };
