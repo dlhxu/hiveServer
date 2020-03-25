@@ -21,5 +21,17 @@ module.exports = (sequelize, DataTypes) => {
         tableName: 'userFile'
     });
 
+    UserFile.associate = (models) => {
+         UserFile.belongsTo(models.Application);
+    };
+    
+    UserFile.associate = (models) => {
+         UserFile.hasMany(models.User);
+    };
+    
+    UserFile.associate = (models) => {
+         UserFile.hasMany(models.FileItem);
+    };
+    
     return UserFile
 };
