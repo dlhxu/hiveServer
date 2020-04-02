@@ -1,5 +1,10 @@
 const usersController = require('../controllers').users;
+<<<<<<< HEAD
 const userProfileController = require('../controllers').userProfile;
+=======
+const institutionController = require('../controllers').institution;
+
+>>>>>>> f43ced3... added route for institution
 module.exports = (app) => {
     app.get('/api', (req, res) => res.status(200).send({
         message: 'Welcome to the Todos API!',
@@ -7,6 +12,9 @@ module.exports = (app) => {
 
     //ROUTE TO ADD A NEW USER
     app.post('/api/users', usersController.create);
+
+    //ROUTE TO ADD A NEW INSTITUTION
+    app.post('/api/institution', institutionController.create);
 
     app.post('/api/todos', usersController.create);
 
