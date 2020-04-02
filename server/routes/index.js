@@ -5,5 +5,8 @@ module.exports = (app) => {
         message: 'Welcome to the Todos API!',
     }));
 
+    //ROUTE TO ADD A NEW USER
+    app.post('/api/users', usersController.create);
+
     app.post('/api/todos', usersController.create);
 };
