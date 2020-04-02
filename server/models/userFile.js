@@ -22,12 +22,10 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     UserFile.associate = (models) => {
-         UserFile.belongsTo(models.Application);
+        UserFile.belongsTo(models.Application);
+        UserFile.belongsTo(models.User);
     };
-    
-    UserFile.associate = (models) => {
-         UserFile.belongsTo(models.User);
-    };
+
 
     return UserFile
 };

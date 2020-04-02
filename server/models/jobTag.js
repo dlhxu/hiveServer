@@ -5,12 +5,6 @@ module.exports = (sequelize, DataTypes) => {
             field: 'jobID',
             primaryKey: true
         },
-        employerId: {
-            type: DataTypes.INTEGER,
-            field: 'employerID',
-            primaryKey: true,
-            allowNull: false
-        },
         tagId: {
             type: DataTypes.INTEGER,
             field: 'tagID',
@@ -18,19 +12,14 @@ module.exports = (sequelize, DataTypes) => {
             autoIncrement: true,
             allowNull: false
         },
-        tagName: {
-            type: DataTypes.STRING,
-            field: 'tagName',
-            allowNull: false
-        }
     },{
         tableName: 'jobTags'
     });
-    
+
+    // TODO verify associations match new relationships
     JobTag.associate = (models) => {
         JobTag.belongsTo(models.JobPosting);
-        // TODO update to reflect the table changes
-        JobTag.belongsTo(models.Skill);
+        JobTag.hasOne(models.Tag);
     };
 
     return JobTag
