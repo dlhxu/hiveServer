@@ -32,19 +32,10 @@ module.exports = (sequelize, DataTypes) => {
     });
     
     User.associate = (models) => {
-         User.belongsTo(models.UserFile);
-    };
-    
-    User.associate = (models) => {
-         User.belongsTo(models.Skill);
-    };
-    
-    User.associate = (models) => {
-         User.belongsTo(models.UserEducation);
-    };
-    
-    User.associate = (models) => {
-         User.belongsTo(models.PreviousPosition);
+        User.hasMany(models.UserFile);
+        User.hasMany(models.Skill);
+        User.hasMany(models.UserEducation);
+        User.hasMany(models.PreviousPosition);
     };
     
     return User

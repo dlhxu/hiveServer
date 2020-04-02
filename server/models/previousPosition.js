@@ -37,7 +37,7 @@ module.exports = (sequelize, DataTypes) => {
     });
     
     PreviousPosition.associate = (models) => {
-        PreviousPosition.hasMany(models.User);
+        PreviousPosition.belongsTo(models.User);
     };
 
     return PreviousPosition

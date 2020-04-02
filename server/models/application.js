@@ -41,16 +41,8 @@ module.exports = (sequelize, DataTypes) => {
     });
     
     Application.associate = (models) => {
-        Application.hasMany(models.JobPosting);
-    };
-    
-    Application.associate = (models) => {
-        Application.hasMany(models.UserFile);
-    };
-    
-    // we should consider taking out this relation because Application takes FK from User File, so i'm not sure if this will imply that Application should take FK userID from User instead of UserFile
-    Application.associate = (models) => {
-        Application.hasMany(models.User);
+        Application.belongsTo(models.JobPosting);
+        Application.belongsTo(models.User);
     };
     
     return Application

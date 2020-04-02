@@ -26,12 +26,8 @@ module.exports = (sequelize, DataTypes) => {
     };
     
     UserFile.associate = (models) => {
-         UserFile.hasMany(models.User);
+         UserFile.belongsTo(models.User);
     };
-    
-    UserFile.associate = (models) => {
-         UserFile.hasMany(models.FileItem);
-    };
-    
+
     return UserFile
 };

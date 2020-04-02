@@ -28,11 +28,9 @@ module.exports = (sequelize, DataTypes) => {
     });
     
     JobTag.associate = (models) => {
-        JobTag.hasMany(models.JobPosting);
-    };
-    
-    JobTag.associate = (models) => {
-         JobTag.belongsTo(models.Skill);
+        JobTag.belongsTo(models.JobPosting);
+        // TODO update to reflect the table changes
+        JobTag.belongsTo(models.Skill);
     };
 
     return JobTag

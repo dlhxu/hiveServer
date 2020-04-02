@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
     });
     
     Employer.associate = (models) => {
-         Employer.belongsTo(models.JobPosting);
+         Employer.hasMany(models.JobPosting);
     };
     
     return Employer
