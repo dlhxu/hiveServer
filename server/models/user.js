@@ -33,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
     
     User.associate = (models) => {
         User.hasMany(models.UserFile);
-        User.hasMany(models.Skill);
+        User.hasMany(models.UserTag);
         User.hasMany(models.UserEducation);
         User.hasMany(models.PreviousPosition);
     };
