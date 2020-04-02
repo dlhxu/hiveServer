@@ -4,9 +4,13 @@ const logger = require('morgan');
 const bodyParser = require('body-parser');
 require('http');
 
-
 // Set up the express app
 const app = express();
+
+//set up cross origin resource sharing
+var cors = require('cors');
+app.use(cors());
+
 
 // Log requests to the console.
 app.use(logger('dev'));
