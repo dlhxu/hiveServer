@@ -39,6 +39,11 @@ module.exports = (sequelize, DataTypes) => {
     },{
         tableName: 'application'
     });
-
+    
+    Application.associate = (models) => {
+        Application.belongsTo(models.JobPosting);
+        Application.belongsTo(models.User);
+    };
+    
     return Application
 };

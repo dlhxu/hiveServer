@@ -42,6 +42,11 @@ module.exports = (sequelize, DataTypes) => {
     },{
         tableName: 'userEducation'
     });
+    
+    UserEducation.associate = (models) => {
+        UserEducation.hasMany(models.Institution);
+        UserEducation.belongsTo(models.User);
+    };
 
     return UserEducation
 };

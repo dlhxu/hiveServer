@@ -10,19 +10,11 @@ module.exports = (sequelize, DataTypes) => {
         employerId: {
             type: DataTypes.INTEGER,
             field: 'employerID',
-            primaryKey: true,
-            allowNull: false
-        },
-        company: {
-            type: DataTypes.INTEGER,
-            field: 'company',
-            primaryKey: true,
             allowNull: false
         },
         title: {
             type: DataTypes.INTEGER,
             field: 'title',
-            primaryKey: true,
             allowNull: false
         },
         postingDate: {
@@ -50,14 +42,23 @@ module.exports = (sequelize, DataTypes) => {
             field: 'description',
             allowNull: false
         },
-        applicationLength: {
+        location: {
             type: DataTypes.STRING,
-            field: 'applicationLength',
-            allowNull: false
+            field: 'location',
+        },
+        jobApplicationUrl: {
+            type: DataTypes.STRING,
+            field: 'jobApplicationUrl',
         },
     },{
         tableName: 'jobPosting'
     });
-
+    
+    JobPosting.associate = (models) => {
+        JobPosting.belongsTo(models.Employer);
+        JobPosting.hasMany(models.Application);
+        JobPosting.hasMany(models.JobTag);
+    };
+    
     return JobPosting
 };

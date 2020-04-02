@@ -30,6 +30,13 @@ module.exports = (sequelize, DataTypes) => {
     },{
         tableName: 'users'
     });
-
+    
+    User.associate = (models) => {
+        User.hasMany(models.UserFile);
+        User.hasMany(models.Skill);
+        User.hasMany(models.UserEducation);
+        User.hasMany(models.PreviousPosition);
+    };
+    
     return User
 };

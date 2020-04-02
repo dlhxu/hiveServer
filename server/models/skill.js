@@ -28,5 +28,11 @@ module.exports = (sequelize, DataTypes) => {
         tableName: 'skill'
     });
 
+    Skill.associate = (models) => {
+        Skill.belongsTo(models.User);
+        // TODO update based on table changes
+        Skill.hasMany(models.JobTags);
+    };
+    
     return Skill
 };

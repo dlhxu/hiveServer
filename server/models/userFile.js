@@ -21,5 +21,11 @@ module.exports = (sequelize, DataTypes) => {
         tableName: 'userFile'
     });
 
+    UserFile.associate = (models) => {
+        UserFile.belongsTo(models.Application);
+        UserFile.belongsTo(models.User);
+    };
+
+
     return UserFile
 };

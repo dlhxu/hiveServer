@@ -35,6 +35,10 @@ module.exports = (sequelize, DataTypes) => {
     },{
         tableName: 'previousPosition'
     });
+    
+    PreviousPosition.associate = (models) => {
+        PreviousPosition.belongsTo(models.User);
+    };
 
     return PreviousPosition
 };

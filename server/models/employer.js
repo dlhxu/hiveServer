@@ -14,6 +14,11 @@ module.exports = (sequelize, DataTypes) => {
     },{
         tableName: 'employer'
     });
-
+    
+    Employer.associate = (models) => {
+         Employer.hasMany(models.JobPosting);
+    };
+    
     return Employer
+    
 };
