@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     // TODO verify associations match new relationships
     JobTag.associate = (models) => {
         JobTag.belongsTo(models.JobPosting, {foreignKey:'jobId'});
-        JobTag.hasOne(models.Tag);
+        JobTag.hasOne(models.Tag, {as:"tags", foreignKey:'tagId'});
     };
 
     return JobTag

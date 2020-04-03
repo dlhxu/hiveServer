@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
     });
     
     Employer.associate = (models) => {
-         Employer.hasMany(models.JobPosting);
+         Employer.hasMany(models.JobPosting, {as:"jobPosting", foreignKey:"employerId"});
     };
     
     return Employer

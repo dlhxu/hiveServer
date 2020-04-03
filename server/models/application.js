@@ -6,12 +6,6 @@ module.exports = (sequelize, DataTypes) => {
             primaryKey: true,
             allowNull: false
         },
-        fileId: {
-            type: DataTypes.INTEGER,
-            field: 'fileID',
-            primaryKey: true,
-            allowNull: false
-        },
         jobId: {
             type: DataTypes.INTEGER,
             field: 'jobID',
@@ -41,8 +35,8 @@ module.exports = (sequelize, DataTypes) => {
     });
     
     Application.associate = (models) => {
-        Application.belongsTo(models.JobPosting);
-        Application.belongsTo(models.User);
+        Application.belongsTo(models.JobPosting, {foreignKey:"jobId"});
+        Application.belongsTo(models.User, {foreignKey:"userId"});
     };
     
     return Application

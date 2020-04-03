@@ -22,8 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     UserFile.associate = (models) => {
-        UserFile.belongsTo(models.Application);
-        UserFile.belongsTo(models.User);
+        UserFile.belongsTo(models.User, {foreignKey: "userId"});
     };
 
 

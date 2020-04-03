@@ -37,7 +37,7 @@ module.exports = (sequelize, DataTypes) => {
     });
     
     PreviousPosition.associate = (models) => {
-        PreviousPosition.belongsTo(models.User);
+        PreviousPosition.belongsTo(models.User, {foreignKey: "userId"});
     };
 
     return PreviousPosition

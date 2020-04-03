@@ -14,8 +14,8 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     Tag.associate = (models) => {
-        Tag.hasMany(models.UserTag, {foreignKey:'tagId'});
-        Tag.belongsTo(models.JobTag);
+        Tag.hasMany(models.UserTag, {as:"userTags", foreignKey:'tagId'});
+        Tag.belongsTo(models.JobTag, {foreignKey:"tagId"});
     };
 
     return Tag

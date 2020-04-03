@@ -45,12 +45,13 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         },
     },{
+
         tableName: 'userEducation'
     });
     
     UserEducation.associate = (models) => {
-        UserEducation.hasMany(models.Institution);
-        UserEducation.belongsTo(models.User);
+        UserEducation.belongsTo(models.Institution, {foreignKey:"institutionId"});
+        UserEducation.belongsTo(models.User, {foreignKey: "userId"});
     };
 
     return UserEducation

@@ -11,7 +11,7 @@ module.exports = (app) => {
     app.post('/api/todos', usersController.create);
 
     // USER PROFILE ROUTES
-    app.get('/api/userProfile/:userId', (req, res)=> {
-        res.send(userProfileController.getUserBasicInfo(req.params.userId))
-    });
+    app.get('/api/userProfile/:userId', userProfileController.getUserBasicInfo);
+
+    app.post('/api/userProfile/newEducation', userProfileController.addUserEducation);
 };
