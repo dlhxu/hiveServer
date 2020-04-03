@@ -13,8 +13,11 @@ module.exports = (app) => {
     //ROUTE TO ADD A NEW USER
     app.post('/api/users', usersController.create);
 
+    //ROUTE TO CHECK IF USER EXISTS AND RETURN ID IF TRUE;
+    app.get('/api/users/:email/:password', usersController.findUser);
+
     //ROUTE TO ADD A NEW INSTITUTION
-    app.post('/api/institution', institutionController.create);
+    app.post('/api/institution', institutionController.findInstitution);
 
     app.post('/api/todos', usersController.create);
 
