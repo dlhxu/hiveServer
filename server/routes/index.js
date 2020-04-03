@@ -23,4 +23,10 @@ module.exports = (app) => {
             .catch(error => res.status(400).send(error));
     });
 
+    app.put('/api/userProfile/:userId', (req, res) => {
+        userProfileController.updateUserBasicInfo(req.body, req.params.userId)
+            .then(userEducation => res.status(201).send(userEducation))
+            .catch(error => res.status(400).send(error));
+    });
+
 };

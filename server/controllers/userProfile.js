@@ -22,10 +22,23 @@ module.exports = {
      * Consumes an object that contains key value pairs of user info fields
      * values to update to
      * Note: even fields that have not been changed will still apply the update function
+     * Meant to save changes users make to their education info after clicking save
      * @param updates
      */
-    updateUserBasicInfo(updates){
-
+    updateUserBasicInfo(updates, userId){
+        return UserEducation.update({
+            degreeName: updates.degreeName,
+            programName: updates.programName,
+            institutionId: updates.institutionId,
+            educationStartDate: updates.educationStartDate,
+            educationEndDate: updates.educationEndDate,
+            degreeLevel: updates.degreeLevel,
+            current: updates.current
+        }, {where: {
+                degreeName: updates.degreeName,
+                programName: updates.programName,
+                userId: userId,
+                institutionId: updates.institutionId,}})
     },
 
     // TODO update function signature to consume parameters instead of req,res
