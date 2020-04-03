@@ -39,13 +39,19 @@ module.exports = (sequelize, DataTypes) => {
             field: 'degreeLevel',
             allowNull: false
         },
+        current: {
+            type: DataTypes.BOOLEAN,
+            field: 'current',
+            allowNull: false
+        },
     },{
+
         tableName: 'userEducation'
     });
     
     UserEducation.associate = (models) => {
-        UserEducation.hasMany(models.Institution);
-        UserEducation.belongsTo(models.User);
+        UserEducation.belongsTo(models.Institution, {foreignKey:"institutionId"});
+        UserEducation.belongsTo(models.User, {foreignKey: "userId"});
     };
 
     return UserEducation

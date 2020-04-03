@@ -17,8 +17,8 @@ module.exports = (sequelize, DataTypes) => {
 
     // TODO update these based on new relationships
     UserTag.associate = (models) => {
-        UserTag.belongsTo(models.Tag);
-        UserTag.belongsTo(models.User);
+        UserTag.belongsTo(models.Tag, {foreignKey:"tagId"});
+        UserTag.belongsTo(models.User, {foreignKey:"userId"});
     };
 
     return UserTag

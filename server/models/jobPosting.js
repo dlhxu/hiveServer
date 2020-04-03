@@ -55,9 +55,9 @@ module.exports = (sequelize, DataTypes) => {
     });
     
     JobPosting.associate = (models) => {
-        JobPosting.belongsTo(models.Employer);
-        JobPosting.hasMany(models.Application);
-        JobPosting.hasMany(models.JobTag);
+        JobPosting.belongsTo(models.Employer, {foreignKey: "employerId"});
+        JobPosting.hasMany(models.Application, {as: "application", foreignKey:"jobId"});
+        JobPosting.hasMany(models.JobTag, {as:"jobTags", foreignKey:"jobId"});
     };
     
     return JobPosting

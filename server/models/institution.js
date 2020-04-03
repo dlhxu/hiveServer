@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     Institution.associate = (models) => {
-         Institution.belongsTo(models.UserEducation);
+         Institution.hasMany(models.UserEducation, {as: "userEducation", foreignKey: "institutionId"});
     };
     
     return Institution
