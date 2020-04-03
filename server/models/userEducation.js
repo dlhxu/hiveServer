@@ -39,6 +39,11 @@ module.exports = (sequelize, DataTypes) => {
             field: 'degreeLevel',
             allowNull: false
         },
+        current: {
+            type: DataTypes.BOOLEAN,
+            field: 'current',
+            allowNull: false
+        },
     },{
         tableName: 'userEducation'
     });
