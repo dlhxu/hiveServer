@@ -11,7 +11,16 @@ module.exports = (app) => {
     app.post('/api/todos', usersController.create);
 
     // USER PROFILE ROUTES
-    app.get('/api/userProfile/:userId', userProfileController.getUserBasicInfo);
+    app.get('/api/userProfile/:userId', (req, res) => {
+        userProfileController.getUserBasicInfo(req.params.userId)
+            .then(userInfo => res.status(201).send(userInfo))
+            .catch(error => res.status(400).send(error));
+    });
 
-    app.post('/api/userProfile/newEducation', userProfileController.addUserEducation);
+    app.post('/api/userProfile/newEducation', (req, res) => {
+        userProfileController.addUserEducation(req.body)
+            .then(userEducation => res.status(201).send(userEducation))
+            .catch(error => res.status(400).send(error));
+    });
+
 };

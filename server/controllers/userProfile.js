@@ -4,19 +4,18 @@ const UserEducation = require('../models').UserEducation;
 module.exports = {
 
     // TODO update function signature to consume parameters instead of req,res
-     getUserBasicInfo(req, res){
+     getUserBasicInfo(userId){
         // get user based on user id, include associated userEducation=current in the query
         return User.findByPk(
-                req.params.userId, {
-                        include: {
-                            model:UserEducation,
-                            as: 'userEducation',
-                            where:{
-                                current: true
-                            }}})
-                .then(userInfo => res.status(201).send(userInfo))
-                .catch(error => res.status(400).send(error));
+                userId, {
+                    include: {
+                        model:UserEducation,
+                        as: 'userEducation',
+                        where:{
+                            current: true
+                        }}});
     },
+
     // TODO create functionality to edit users basic information
 
     /**
@@ -30,20 +29,18 @@ module.exports = {
     },
 
     // TODO update function signature to consume parameters instead of req,res
-    addUserEducation(req, res){
-        UserEducation
-            .create({
-                degreeName: req.body.degreeName,
-                programName: req.body.programName,
-                userId: req.body.userId,
-                institutionId: req.body.institutionId,
-                educationStartDate: req.body.educationStartDate,
-                educationEndDate: req.body.educationEndDate,
-                degreeLevel: req.body.degreeLevel,
-                current: req.body.current
-            })
-            .then(userEducation => res.status(201).send(userEducation))
-            .catch(error => res.status(400).send(error));
+    addUserEducation(educationInfo){
+        return UserEducation
+                .create({
+                    degreeName: educationInfo.degreeName,
+                    programName: educationInfo.programName,
+                    userId: educationInfo.userId,
+                    institutionId: educationInfo.institutionId,
+                    educationStartDate: educationInfo.educationStartDate,
+                    educationEndDate: educationInfo.educationEndDate,
+                    degreeLevel: educationInfo.degreeLevel,
+                    current: educationInfo.current
+                });
     },
 
     // TODO create functionality to display user experience and add/delete entries
