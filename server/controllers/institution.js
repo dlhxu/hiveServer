@@ -1,13 +1,11 @@
 const Institution = require('../models').Institution;
 
 module.exports = {
-    findInstitution(req, res) {
+    findInstitution(institutionName) {
         return Institution
             .findOrCreate({
-                where: {institutionName: req.body.institutionName}
+                where: {institutionName: institutionName}
             })
-            .then(institution => res.status(201).send(institution))
-            .catch(error => res.status(400).send(error));
     },
     create(req, res) {
         console.log(req.body.institutionName);

@@ -1,23 +1,37 @@
 const usersController = require('../controllers').users;
-<<<<<<< HEAD
 const userProfileController = require('../controllers').userProfile;
-=======
 const institutionController = require('../controllers').institution;
 
->>>>>>> f43ced3... added route for institution
 module.exports = (app) => {
     app.get('/api', (req, res) => res.status(200).send({
         message: 'Welcome to the Todos API!',
     }));
 
     //ROUTE TO ADD A NEW USER
-    app.post('/api/users', usersController.create);
+    app.post('/api/users', (req, res) => {
+        usersController.create({
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            email: req.body.email,
+            password: req.body.password
+        })
+            .then(user => res.status(201).send(user))
+            .catch(error => res.status(400).send(error));
+    });
 
     //ROUTE TO CHECK IF USER EXISTS AND RETURN ID IF TRUE;
-    app.get('/api/users/:email/:password', usersController.findUser);
+    app.get('/api/users/:email/:password', (req, res) => {
+        usersController.findUser(req.params.email, req.params.password)
+            .then(user => res.status(201).send(user))
+            .catch(error => res.status(400).send(error));
+    });
 
     //ROUTE TO ADD A NEW INSTITUTION
-    app.post('/api/institution', institutionController.findInstitution);
+    app.post('/api/institution', (req, res) => {
+        institutionController.findInstitution(req.body.institutionName)
+            .then(institution => res.status(201).send(institution))
+            .catch(error => res.status(400).send(error));
+    });
 
     app.post('/api/todos', usersController.create);
 
