@@ -1,16 +1,20 @@
 const User = require('../models').User;
 
 module.exports = {
-    create(req, res) {
+    create(userInformation) {
         return User
-            .create({
-                firstName: req.body.firstName,
-                lastName: req.body.lastName,
-                email: req.body.email,
-                password: req.body.password
+            .create(userInformation)
+    },
+
+    findUser(email, password) {
+        return User.findAll({
+            limit: 1,
+            where: {
+                email: email,
+                password: password
+            }
             })
-            .then(user => res.status(201).send(user))
-            .catch(error => res.status(400).send(error));
+
     },
 
     list(req, res) {

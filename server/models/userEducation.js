@@ -48,7 +48,7 @@ module.exports = (sequelize, DataTypes) => {
 
         tableName: 'userEducation'
     });
-    
+
     UserEducation.associate = (models) => {
         UserEducation.belongsTo(models.Institution, {foreignKey:"institutionId"});
         UserEducation.belongsTo(models.User, {foreignKey: "userId"});
