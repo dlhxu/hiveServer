@@ -105,6 +105,7 @@ module.exports = {
             userId: userId,
             positionName: positionInfo.positionName,
             positionDescription: positionInfo.positionDescription,
+            companyName: positionInfo.companyName,
             positionStartDate: positionInfo.positionStartDate,
             positionEndDate: positionInfo.positionEndDate
         });
@@ -122,6 +123,7 @@ module.exports = {
         return PreviousPosition.update({
             positionName: updates.positionName,
             positionDescription: updates.positionDescription,
+            companyName: updates.companyName,
             positionStartDate: updates.positionStartDate,
             positionEndDate: updates.positionEndDate
         }, {where: {

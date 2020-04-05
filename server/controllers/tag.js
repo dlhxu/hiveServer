@@ -1,16 +1,25 @@
 const Tag = require('../models').Tag;
 
 module.exports = {
-    findOrCreateTag(tagName) {
-        return Tag
-            .findOrCreate({
-                where: {tagName: tagName}
-            })
+
+    /**
+     * This method consumes no parameters and returns an array of all the tag objects in the database
+     * @returns {Promise<Model[]>} array of Tag objects
+     */
+    getAllTags(){
+        return Tag.findAll();
     },
-    list(req, res) {
-        return Tag
-            .findAll()
-            .then(tags => res.status(200).send(tags))
-            .catch(error => res.status(400).send(error));
-    },
+
+    /**
+     * This method returns a array of Tag objects given an array of tagNames
+     * @param tagNames an array of tagNames
+     * @returns {Promise<Model[]>}
+     */
+    getTags(tagNames){
+        return Tag.findAll({
+            where:{
+                tagName: tagNames
+            }
+        });
+    }
 };

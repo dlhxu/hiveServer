@@ -16,6 +16,11 @@ module.exports = (sequelize, DataTypes) => {
             field: 'positionName',
             allowNull: false
         },
+        companyName: {
+            type: DataTypes.STRING,
+            field: 'companyName',
+            allowNull: true
+        },
         positionDescription: {
             type: DataTypes.STRING,
             field: 'positionDescription',
@@ -30,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.DATE,
             field: 'positionEndDate',
             allowNull: false
-        },
+        }
 
     },{
         tableName: 'previousPosition'

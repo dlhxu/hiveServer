@@ -40,9 +40,7 @@ module.exports = (app) => {
         institutionController.getInstitutionName(req.params.institutionId)
             .then(institution => res.status(201).send(institution))
             .catch(error => res.status(400).send(error));
-    })
-
-    app.post('/api/todos', usersController.create);
+    });
 
     // USER PROFILE ROUTES
 
@@ -67,11 +65,13 @@ module.exports = (app) => {
             .catch(error => res.status(400).send(error));
     });
 
-    // delete a user's previous position info (work experience info)
+    // delete a user's previous education info
     app.delete('/api/userProfile/:userId/removeEducation', (req, res) => {
         res.status(200).send(userProfileController.deleteUserEducation(req.body, req.params.userId))
             .catch (error => res.status(400).send(error));
     });
+
+    // PREVIOUS POSITIONS
 
     // get all of a users previous positions
     app.get('/api/userProfile/:userId/previousPositions', (req, res) => {
@@ -100,5 +100,29 @@ module.exports = (app) => {
             .catch (error => res.status(400).send(error));
 
     });
+
+
+    // USER SKILLS (userTags)
+
+    // get all userTags (skills) associated with a user
+    app.get('/api/userProfile/:userId/skills', (req, res) => {
+        userTagsController.getUserTags(req.params.userId)
+            .then(userTags => res.status(200).send(userTags))
+            .catch(error => res.status(400).send(error));
+    });
+
+    // add a new userTag, ie associate a skill with a user
+    app.post('/api/userProfile/:userId/skills/:tagId', (req, res) => {
+        userTagsController.addNewUserTag(req.params.userId, req.params.tagId)
+            .then(userEducation => res.status(200).send(userEducation))
+            .catch(error => res.status(400).send(error));
+    });
+
+    // delete a user's previous education info
+    app.delete('/api/userProfile/:userId/skills/:tagId', (req, res) => {
+        res.status(200).send(userProfileController.deleteUserEducation(req.params.userId, req.params.tagId))
+            .catch (error => res.status(400).send(error));
+    });
+
 
 };
