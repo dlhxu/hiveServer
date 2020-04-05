@@ -1,6 +1,8 @@
 const usersController = require('../controllers').users;
 const userProfileController = require('../controllers').userProfile;
 const institutionController = require('../controllers').institution;
+const tagController = require('../controllers').tag;
+const userTagsController = require('../controllers').userTag;
 
 module.exports = (app) => {
     app.get('/api', (req, res) => res.status(200).send({
@@ -32,6 +34,13 @@ module.exports = (app) => {
             .then(institution => res.status(201).send(institution))
             .catch(error => res.status(400).send(error));
     });
+
+    //ROUTE TO GET INSTITUTION NAME BASED ON ID
+    app.get('/api/institution/:institutionId', (req, res) => {
+        institutionController.getInstitutionName(req.params.institutionId)
+            .then(institution => res.status(201).send(institution))
+            .catch(error => res.status(400).send(error));
+    })
 
     app.post('/api/todos', usersController.create);
 
