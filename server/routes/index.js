@@ -4,6 +4,7 @@ const institutionController = require('../controllers').institution;
 const tagController = require('../controllers').tag;
 const userTagsController = require('../controllers').userTag;
 const jobPostingController = require('../controllers').jobPosting;
+const applicationController = require('../controllers').application;
 
 module.exports = (app) => {
     app.get('/api', (req, res) => res.status(200).send({
@@ -136,10 +137,84 @@ module.exports = (app) => {
 
     // JOB POSTINGS
 
+    // SEARCH
     // get job postings that match tagIds
     app.get('/api/search', (req,res) => {
         jobPostingController.getJobsByTagIds(req.body.tagIds)
             .then(jobPostings => res.status(200).send(jobPostings))
+            .catch(error => res.status(400).send(error));
+    });
+
+
+    // DASHBOARD
+    // get suggested jobs for a given user
+    app.get('./api/search/:userId', (req,res) => {
+        jobPostingController.getSuggestedJobs(req.params.userId)
+            .then(jobPostings => res.status(200).send(jobPostings))
+            .catch(error => res.status(400).send(error));
+    });
+
+    // JOB APPLICATIONS
+
+    // get all applications a user has submitted or saved + associated job posting
+    app.get('./api/userProfile/:userId/applications', (req,res)=>{
+        applicationController.getAllUserApplications(req.params.userId)
+            .then(applications => res.status(200).send(applications))
+            .catch(error => res.status(400).send(error));
+    });
+
+    // get all applications a user has saved
+    app.get('./api/userProfile/:userId/applications', (req,res)=>{
+        applicationController.getSavedApplications(req.params.userId)
+            .then(applications => res.status(200).send(applications))
+            .catch(error => res.status(400).send(error));
+    });
+
+    // get all applications a user has started (in progress)
+    app.get('./api/userProfile/:userId/applications', (req,res)=>{
+        applicationController.getInProgressApplications(req.params.userId)
+            .then(applications => res.status(200).send(applications))
+            .catch(error => res.status(400).send(error));
+    });
+
+    // get all applications a user has completed (submitted)
+    app.get('./api/userProfile/:userId/applications', (req,res)=>{
+        applicationController.getCompletedApplications(req.params.userId)
+            .then(applications => res.status(200).send(applications))
+            .catch(error => res.status(400).send(error));
+    });
+
+    // get all applications a user has submitted or saved + associated job posting
+    app.get('./api/userProfile/:userId/applications', (req,res)=>{
+        applicationController.getAllUserApplications(req.params.userId)
+            .then(applications => res.status(200).send(applications))
+            .catch(error => res.status(400).send(error));
+    });
+
+    // let a user apply to a job (they click the job link or smth)
+    app.post('./api/userProfile/:userId/applications', (req,res)=>{
+        applicationController.createNewUserApplication(req.params.userId, req.body.jobPosting)
+            .then(application => res.status(200).send(application))
+            .catch(error => res.status(400).send(error));
+    });
+
+    // let a user save a job (they clicked on save job or smth)
+    app.post('./api/userProfile/:userId/applications/save', (req,res)=>{
+        applicationController.createNewUserSavedJob(req.params.userId, req.body.jobPosting)
+            .then(application => res.status(200).send(application))
+            .catch(error => res.status(400).send(error));
+    });
+
+    // delete a user's userTag, ie dissociate a skill with a user
+    app.delete('./api/userProfile/:userId/applications', (req, res) => {
+        res.status(200).send(applicationController.deleteUserSavedJob(req.params.userId, req.body.application))
+            .catch (error => res.status(400).send(error));
+    });
+
+    // let a user apply to a job (they click the job link or smth)
+    app.put('./api/userProfile/:userId/applications', (req,res)=>{
+        applicationController.completeApplication(req.params.userId, req.body.application)
+            .then(application => res.status(200).send(application))
             .catch(error => res.status(400).send(error));
     });
 
