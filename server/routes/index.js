@@ -36,22 +36,60 @@ module.exports = (app) => {
     app.post('/api/todos', usersController.create);
 
     // USER PROFILE ROUTES
+
+    // get a users basic info, provide userId in route
     app.get('/api/userProfile/:userId', (req, res) => {
         userProfileController.getUserBasicInfo(req.params.userId)
-            .then(userInfo => res.status(201).send(userInfo))
+            .then(userInfo => res.status(200).send(userInfo))
             .catch(error => res.status(400).send(error));
     });
 
-    app.post('/api/userProfile/newEducation', (req, res) => {
-        userProfileController.addUserEducation(req.body)
-            .then(userEducation => res.status(201).send(userEducation))
+    // add a new education to a user
+    app.post('/api/userProfile/:userId/newEducation', (req, res) => {
+        userProfileController.addUserEducation(req.body, req.params.userId)
+            .then(userEducation => res.status(200).send(userEducation))
             .catch(error => res.status(400).send(error));
     });
 
-    app.put('/api/userProfile/:userId', (req, res) => {
+    // update a user's basic info (education info)
+    app.put('/api/userProfile/:userId/updateEducation', (req, res) => {
         userProfileController.updateUserBasicInfo(req.body, req.params.userId)
-            .then(userEducation => res.status(201).send(userEducation))
+            .then(numUpdated => res.status(200).send(numUpdated))
             .catch(error => res.status(400).send(error));
+    });
+
+    // delete a user's previous position info (work experience info)
+    app.delete('/api/userProfile/:userId/removeEducation', (req, res) => {
+        res.status(200).send(userProfileController.deleteUserEducation(req.body, req.params.userId))
+            .catch (error => res.status(400).send(error));
+    });
+
+    // get all of a users previous positions
+    app.get('/api/userProfile/:userId/previousPositions', (req, res) => {
+        userProfileController.getUserPreviousPositions(req.params.userId)
+            .then(previousPositions => res.status(200).send(previousPositions))
+            .catch(error => res.status(400).send(error));
+    });
+
+    // add a previous position to a user
+    app.post('/api/userProfile/:userId/previousPositions', (req, res) => {
+        userProfileController.addUserPreviousPosition(req.body, req.params.userId)
+            .then(previousPosition => res.status(200).send(previousPosition))
+            .catch(error => res.status(400).send(error));
+    });
+
+    // update a user's previous position info (work experience info)
+    app.put('/api/userProfile/:userId/previousPositions/:positionId', (req, res) => {
+        userProfileController.updateUserPreviousPosition(req.body, req.params.userId, req.params.positionId)
+            .then(numUpdated => res.status(200).send(numUpdated))
+            .catch(error => res.status(400).send(error));
+    });
+
+    // delete a user's previous position info (work experience info)
+    app.delete('/api/userProfile/:userId/previousPositions/:positionId', (req, res) => {
+        res.status(200).send(userProfileController.deleteUserPreviousPosition(req.params.userId, req.params.positionId))
+            .catch (error => res.status(400).send(error));
+
     });
 
 };
