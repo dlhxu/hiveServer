@@ -16,6 +16,12 @@ module.exports = {
             .then(institution => res.status(201).send(institution))
             .catch(error => res.status(400).send(error));
     },
+    getInstitutionName(id) {
+        return Institution
+            .findOne({
+                where: {institutionId: id}
+            })
+    },
 
     list(req, res) {
         return Institution
