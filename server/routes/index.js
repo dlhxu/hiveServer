@@ -3,6 +3,7 @@ const userProfileController = require('../controllers').userProfile;
 const institutionController = require('../controllers').institution;
 const tagController = require('../controllers').tag;
 const userTagsController = require('../controllers').userTag;
+const jobPostingController = require('../controllers').jobPosting;
 
 module.exports = (app) => {
     app.get('/api', (req, res) => res.status(200).send({
@@ -101,6 +102,15 @@ module.exports = (app) => {
 
     });
 
+    // TAGS
+
+    // get all available tags
+    app.get('/api/tags', (req, res) => {
+        tagController.getAllTags()
+            .then(tags => res.status(200).send(tags))
+            .catch(error => res.status(400).send(error));
+    });
+
 
     // USER SKILLS (userTags)
 
@@ -118,11 +128,19 @@ module.exports = (app) => {
             .catch(error => res.status(400).send(error));
     });
 
-    // delete a user's previous education info
+    // delete a user's userTag, ie dissociate a skill with a user
     app.delete('/api/userProfile/:userId/skills/:tagId', (req, res) => {
-        res.status(200).send(userProfileController.deleteUserEducation(req.params.userId, req.params.tagId))
+        res.status(200).send(userTagsController.removeUserTag(req.params.userId, req.params.tagId))
             .catch (error => res.status(400).send(error));
     });
 
+    // JOB POSTINGS
+
+    // get job postings that match tagIds
+    app.get('/api/search', (req,res) => {
+        jobPostingController.getJobsByTagIds(req.body.tagIds)
+            .then(jobPostings => res.status(200).send(jobPostings))
+            .catch(error => res.status(400).send(error));
+    });
 
 };
