@@ -4,6 +4,7 @@ const institution = require('./institution');
 const tag = require('./tag');
 const userTag = require('./userTag');
 const jobPosting = require('./jobPosting');
+const application = require('./application');
 
 module.exports = {
     users,
@@ -11,5 +12,6 @@ module.exports = {
     institution,
     tag,
     userTag,
-    jobPosting
+    jobPosting,
+    application
 };
