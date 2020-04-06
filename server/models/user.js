@@ -32,7 +32,6 @@ module.exports = (sequelize, DataTypes) => {
     });
     
     User.associate = (models) => {
-        User.hasMany(models.UserFile, {as: "userFile", foreignKey:"userId"});
         User.hasMany(models.UserTag, {as: "userTags", foreignKey:"userId"});
         User.hasMany(models.UserEducation, {as: "userEducation", foreignKey: "userId"});
         User.hasMany(models.PreviousPosition, {as: "previousPosition", foreignKey:"userId"});

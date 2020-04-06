@@ -26,11 +26,18 @@ module.exports = {
      * values to update to
      * Note: even fields that have not been changed will still apply the update function
      * Meant to save changes users make to their education info after clicking save
-     * @param updates
+     * @param updates, includes first and last name
      * @param userId
      * @returns {*} number of updated rows
      */
-    updateUserBasicInfo(updates, userId){
+    async updateUserBasicInfo(updates, userId){
+        const numUserUpdates = await User.update({
+            firstName: updates.firstName,
+            lastName: updates.lastName,}, {where:{
+                userId: userId
+            }
+        });
+        console.log(`number of user rows updated: ${numUserUpdates}`)
         return UserEducation.update({
             degreeName: updates.degreeName,
             programName: updates.programName,
@@ -43,7 +50,7 @@ module.exports = {
                 degreeName: updates.degreeName,
                 programName: updates.programName,
                 userId: userId,
-                institutionId: updates.institutionId,}})
+                institutionId: updates.institutionId,}});
     },
 
     /**
