@@ -66,9 +66,9 @@ module.exports = {
     async getSuggestedJobs(userId){
 
        // get all of the users associated tags, then map into array of tag ids
-       const userTags = userTagController.getUserTags(userId);
+       const userTags = await userTagController.getUserTags(userId);
        let tagIds = userTags.map(userTag => userTag.tagId);
 
-       return getJobsByTagIds(tagIds);
+       return module.exports.getJobsByTagIds(tagIds);
     }
 };
