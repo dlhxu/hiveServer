@@ -30,14 +30,7 @@ module.exports = {
      * @param userId
      * @returns {*} number of updated rows
      */
-    async updateUserBasicInfo(updates, userId){
-        const numUserUpdates = await User.update({
-            firstName: updates.firstName,
-            lastName: updates.lastName,}, {where:{
-                userId: userId
-            }
-        });
-        console.log(`number of user rows updated: ${numUserUpdates}`)
+     updateUserBasicInfo(updates, userId){
         return UserEducation.update({
             degreeName: updates.degreeName,
             programName: updates.programName,
