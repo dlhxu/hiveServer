@@ -13,7 +13,7 @@ from nltk.stem import PorterStemmer
 import csv
 from selenium import webdriver
 
-driver = webdriver.Chrome("C:/Users/Daria Yampolsky/Downloads/chromedriver_win32/chromedriver")
+driver = webdriver.Chrome("C:/chromedriver_win32/chromedriver")
 
 # key words / tags in tags database
 tool_keywords1 = ['sales','IT','marketing','customer support','QA','cloud','AI','ML','design','python', 'sql',
